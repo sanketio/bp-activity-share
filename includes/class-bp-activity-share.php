@@ -17,7 +17,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since   1.0.0
+ * @since   	1.0.0
  *
  * @package     BP_Activity_Share
  * @subpackage  BP_Activity_Share/includes
@@ -76,6 +76,7 @@ class BP_Activity_Share {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_public_hooks();
 
 	}
 
@@ -86,6 +87,7 @@ class BP_Activity_Share {
 	 *
 	 * - Plugin_Name_Loader.    Orchestrates the hooks of the plugin.
 	 * - Plugin_Name_i18n.      Defines internationalization functionality.
+	 * - Plugin_Name_Public. 	Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -108,6 +110,12 @@ class BP_Activity_Share {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bp-activity-share-i18n.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bp-activity-share-public.php';
+
 		$this->loader = new BP_Activity_Share_Loader();
 
 	}
@@ -128,6 +136,20 @@ class BP_Activity_Share {
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
+	}
+
+	/**
+	 * Register all of the hooks related to the public-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_public_hooks() {
+
+		$bp_activity_share_public = new BP_Activity_Share_Public( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'bp_activity_entry_meta', $bp_activity_share_public, 'bp_activity_share_button_render' );
 	}
 
 	/**
