@@ -150,6 +150,7 @@ class BP_Activity_Share {
 		$bp_activity_share_public = new BP_Activity_Share_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'bp_activity_entry_meta', $bp_activity_share_public, 'bp_activity_share_button_render' );
+		$this->loader->add_action( 'bp_actions', $bp_activity_share_public, 'bp_activity_action_share_activity' );
 	}
 
 	/**

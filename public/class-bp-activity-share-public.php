@@ -99,7 +99,7 @@ class BP_Activity_Share_Public {
 		$activity_type = bp_get_activity_type();
 
 		// Supported activity types array.
-		$activity_supported_types = array( 'activity_update' );
+		$activity_supported_types = array( 'activity_update', 'bp_activity_share' );
 		$activity_supported_types = apply_filters( 'bp_activity_share_supported_types', $activity_supported_types );
 
 		// Checking if activity is supported for share.
@@ -150,7 +150,7 @@ class BP_Activity_Share_Public {
 
 		global $activities_template;
 
-		return apply_filters( 'bp_get_activity_share_link', wp_nonce_url( home_url( bp_get_activity_root_slug() . '/share/' . $activities_template->activity->id . '/' ), 'share' ) );
+		return apply_filters( 'bp_get_activity_share_link', wp_nonce_url( home_url( bp_get_activity_root_slug() . '/bp_activity_share/' . $activities_template->activity->id . '/' ), 'bp_share_activity' ) );
 
 	}
 
@@ -172,6 +172,81 @@ class BP_Activity_Share_Public {
 		$count = 0;
 
 		return (int) $count;
+
+	}
+
+	public function bp_activity_action_share_activity() {
+
+		if ( ! is_user_logged_in() || ! bp_is_activity_component() || ! bp_is_current_action( 'bp_activity_share' ) ) {
+			return false;
+		}
+
+		// Check the nonce.
+		check_admin_referer( 'bp_share_activity' );
+
+		// Activity ID of activity being share
+		$parent_activity_id = bp_action_variable( 0 );
+
+		$user_id = bp_loggedin_user_id();
+
+		// Getting activity using Activity ID
+		$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $parent_activity_id ) );
+
+		// Parent activity user's profile link
+		$parent_profile_link_href = bp_core_get_user_domain( $parent_activity['activities'][0]->user_id );
+		$parent_username 		  = bp_core_get_username( $parent_activity['activities'][0]->user_id );
+		$parent_profile_link 	  = '<a href="' . esc_url( $parent_profile_link_href ) . '">' . esc_html( $parent_username ) . '</a>';
+
+		// Current user's profile link
+		$current_profile_link_href = bp_core_get_user_domain( $user_id );
+		$current_username 		   = bp_core_get_username( $user_id );
+		$current_profile_link 	   = '<a href="' . esc_url( $current_profile_link_href ) . '">' . esc_html( $current_username ) . '</a>';
+
+		if ( $parent_activity['activities'][0]->user_id === $user_id ) {
+			$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
+		} else {
+			$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
+		}
+
+		$item_id = ( 0 === $parent_activity['activities'][0]->item_id ) ? $parent_activity['activities'][0]->id : $parent_activity['activities'][0]->item_id;
+
+		$secondary_item_id = ( 0 === $parent_activity['activities'][0]->secondary_item_id ) ? $parent_activity['activities'][0]->id : $parent_activity_id;
+
+		// Activity Component
+		$component = bp_current_component();
+
+		// prepare activity arguments
+		$activity_args = array(
+			'user_id'           => $user_id,
+			'action'            => $action,
+			'component'			=> $component,
+			'content'           => $parent_activity['activities'][0]->content,
+			'type'              => 'bp_activity_share',
+			'primary_link'      => $current_profile_link,
+			'secondary_item_id' => $secondary_item_id,
+			'item_id' 			=> $item_id,
+		);
+
+		$activity_id = bp_activity_add( $activity_args );
+
+		// Maintaining share activity count
+		$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count' );
+		$share_count = ! empty( $share_count ) ? ( int ) $share_count + 1 : 1;
+
+		bp_activity_update_meta( $item_id, 'bp_share_activity_count', $share_count );
+
+		// Maintaining user's shared activity
+		$my_shared = bp_get_user_meta( $user_id, 'bp_shared_activities', true );
+
+		if ( empty( $my_shared ) || ! is_array( $my_shared ) ) {
+			$my_shared = array();
+		}
+
+		if ( ! in_array( $activity_id, $my_shared, true ) ) {
+			$my_shared[] = $activity_id;
+		}
+
+		bp_update_user_meta( $user_id, 'bp_shared_activities', $my_shared );
 
 	}
 }
