@@ -204,19 +204,38 @@ class BP_Activity_Share_Public {
 		// Getting activity using Activity ID.
 		$current_activity = bp_activity_get_specific( array( 'activity_ids' => $current_activity_id ) );
 
-		// Parent activity user's profile link.
-		$parent_profile_link 	  = bp_core_get_userlink( $current_activity['activities'][0]->user_id );
-
 		// Current user's profile link.
 		$current_profile_link 	   = bp_core_get_userlink( $current_user_id );
 
-		if ( $current_activity['activities'][0]->user_id === $current_user_id ) {
+		if ( 0 === $current_activity['activities'][0]->item_id ) {
+			// User ID as a current activity's User ID
+			$user_id = $current_user_id;
+
+			// Parent activity user's profile link.
+			$parent_profile_link = bp_core_get_userlink( $current_activity['activities'][0]->user_id );
+
+			// Item id as an activity ID.
+			$item_id = $current_activity['activities'][0]->id;
+		} else {
+			// Getting parent activity using Item ID.
+			$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $current_activity['activities'][0]->item_id ) );
+
+			// User ID as a parent activity's User ID
+			$user_id = $parent_activity['activities'][0]->user_id;
+
+			// Parent activity user's profile link.
+			$parent_profile_link = bp_core_get_userlink( $parent_activity['activities'][0]->user_id );
+
+			// Item id as an activity ID.
+			$item_id = $current_activity['activities'][0]->item_id;
+		}
+
+		if ( $current_user_id === $user_id ) {
 			$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
 		} else {
 			$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
 		}
 
-		$item_id 		   = ( 0 === $current_activity['activities'][0]->item_id ) ? $current_activity['activities'][0]->id : $current_activity['activities'][0]->item_id;
 		$secondary_item_id = ( 0 === $current_activity['activities'][0]->secondary_item_id ) ? $current_activity['activities'][0]->id : $current_activity_id;
 
 		// Activity Component.
