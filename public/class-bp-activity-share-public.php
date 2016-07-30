@@ -169,9 +169,12 @@ class BP_Activity_Share_Public {
 
 		global $activities_template;
 
-		$count = 0;
+		$item_id = ( 0 === $activities_template->activity->item_id ) ? $activities_template->activity->id : $activities_template->activity->item_id;
 
-		return (int) $count;
+		// Getting activity share count.
+		$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count', true );
+
+		return (int) $share_count;
 
 	}
 
@@ -194,42 +197,37 @@ class BP_Activity_Share_Public {
 		check_admin_referer( 'bp_share_activity' );
 
 		// Activity ID of activity being share.
-		$parent_activity_id = bp_action_variable( 0 );
+		$current_activity_id = bp_action_variable( 0 );
 
-		$user_id = bp_loggedin_user_id();
+		$current_user_id = bp_loggedin_user_id();
 
 		// Getting activity using Activity ID.
-		$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $parent_activity_id ) );
+		$current_activity = bp_activity_get_specific( array( 'activity_ids' => $current_activity_id ) );
 
 		// Parent activity user's profile link.
-		$parent_profile_link_href = bp_core_get_user_domain( $parent_activity['activities'][0]->user_id );
-		$parent_username 		  = bp_core_get_username( $parent_activity['activities'][0]->user_id );
-		$parent_profile_link 	  = '<a href="' . esc_url( $parent_profile_link_href ) . '">' . esc_html( $parent_username ) . '</a>';
+		$parent_profile_link 	  = bp_core_get_userlink( $current_activity['activities'][0]->user_id );
 
 		// Current user's profile link.
-		$current_profile_link_href = bp_core_get_user_domain( $user_id );
-		$current_username 		   = bp_core_get_username( $user_id );
-		$current_profile_link 	   = '<a href="' . esc_url( $current_profile_link_href ) . '">' . esc_html( $current_username ) . '</a>';
+		$current_profile_link 	   = bp_core_get_userlink( $current_user_id );
 
-		if ( $parent_activity['activities'][0]->user_id === $user_id ) {
+		if ( $current_activity['activities'][0]->user_id === $current_user_id ) {
 			$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
 		} else {
 			$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
 		}
 
-		$item_id = ( 0 === $parent_activity['activities'][0]->item_id ) ? $parent_activity['activities'][0]->id : $parent_activity['activities'][0]->item_id;
-
-		$secondary_item_id = ( 0 === $parent_activity['activities'][0]->secondary_item_id ) ? $parent_activity['activities'][0]->id : $parent_activity_id;
+		$item_id 		   = ( 0 === $current_activity['activities'][0]->item_id ) ? $current_activity['activities'][0]->id : $current_activity['activities'][0]->item_id;
+		$secondary_item_id = ( 0 === $current_activity['activities'][0]->secondary_item_id ) ? $current_activity['activities'][0]->id : $current_activity_id;
 
 		// Activity Component.
 		$component = bp_current_component();
 
 		// Prepare activity arguments.
 		$activity_args = array(
-			'user_id'           => $user_id,
+			'user_id'           => $current_user_id,
 			'action'            => $action,
 			'component'			=> $component,
-			'content'           => $parent_activity['activities'][0]->content,
+			'content'           => $current_activity['activities'][0]->content,
 			'type'              => 'bp_activity_share',
 			'primary_link'      => $current_profile_link,
 			'secondary_item_id' => $secondary_item_id,
@@ -239,13 +237,13 @@ class BP_Activity_Share_Public {
 		$activity_id = bp_activity_add( $activity_args );
 
 		// Maintaining share activity count.
-		$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count' );
+		$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count', true );
 		$share_count = ! empty( $share_count ) ? (int) $share_count + 1 : 1;
 
 		bp_activity_update_meta( $item_id, 'bp_share_activity_count', $share_count );
 
 		// Maintaining user's shared activity.
-		$my_shared = bp_get_user_meta( $user_id, 'bp_shared_activities', true );
+		$my_shared = bp_get_user_meta( $current_user_id, 'bp_shared_activities', true );
 
 		if ( empty( $my_shared ) || ! is_array( $my_shared ) ) {
 			$my_shared = array();
@@ -255,7 +253,7 @@ class BP_Activity_Share_Public {
 			$my_shared[] = $activity_id;
 		}
 
-		bp_update_user_meta( $user_id, 'bp_shared_activities', $my_shared );
+		bp_update_user_meta( $current_user_id, 'bp_shared_activities', $my_shared );
 
 	}
 }
