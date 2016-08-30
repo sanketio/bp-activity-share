@@ -14,10 +14,9 @@
  * @wordpress-plugin
  * Plugin Name:     BP Activity Share
  * Plugin URI:      https://bitbucket.org/sanketio/bp-activity-share
- * Description:     This plugin shares BuddyPress Activity locally (i.e. in site only like we share Facebook posts).
+ * Description:     This plugin shares BuddyPress Activity locally (i.e., in site only like we share Facebook posts).
  * Version:         1.0.0
- * Author:          wp3sixty
- * Author URI:      http://wp3sixty.com/
+ * Author:          Pranali, Sanket
  * License:         GPL-2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:     bp-activity-share
