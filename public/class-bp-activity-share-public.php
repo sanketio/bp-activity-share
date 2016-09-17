@@ -59,12 +59,26 @@ class BP_Activity_Share_Public {
 
 	}
 
+	/**
+	 * Enqueueing js files
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  public
+	 */
 	public function bp_activity_share_enqueue_scripts() {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bp-activity-share-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
+	/**
+	 * Enqueueing css files
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  public
+	 */
 	public function bp_activity_share_enqueue_style() {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bp-activity-share-public.css', '', $this->version );
@@ -95,15 +109,9 @@ class BP_Activity_Share_Public {
 	 *
 	 * @access  private
 	 *
-	 * @global  object  $activities_template
-	 *
 	 * @return  bool    $can_share
 	 */
 	private function bp_activity_share_can_share() {
-
-		global $activities_template;
-
-		$bp = buddypress();
 
 		$can_share = true;
 
@@ -313,6 +321,13 @@ class BP_Activity_Share_Public {
 
 	}
 
+	/**
+	 * Success / Error message for sharing an activity
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  public
+	 */
 	public function bp_activity_share_message() {
 
 		?>

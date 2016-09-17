@@ -25,6 +25,10 @@
 
 					parent.find( '.bp-activity-share-message' ).addClass( 'bp-share-' + response.type ).text( response.message );
 					that.removeClass( 'loading' );
+
+					setTimeout( function( e ) {
+						parent.find( '.bp-activity-share-message' ).removeClass( 'bp-share-' + response.type ).text( '' );
+					}, 10000 );
 				} );
 
 				return false;
