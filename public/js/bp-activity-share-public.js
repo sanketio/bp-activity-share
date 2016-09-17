@@ -6,7 +6,7 @@
 		},
 		bpasShareActivity: function() {
 			$( '.bp-activity-share' ).on( 'click', function() {
-				var that 	  = $( this );
+				var that = $( this );
 
 				that.addClass( 'loading' );
 
@@ -23,6 +23,7 @@
 				$.post( ajaxurl, ajaxdata, function( response ) {
 					response = JSON.parse( response );
 
+					that.children( 'span' ).text( response.share_count );
 					parent.find( '.bp-activity-share-message' ).addClass( 'bp-share-' + response.type ).text( response.message );
 					that.removeClass( 'loading' );
 

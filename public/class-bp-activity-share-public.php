@@ -303,7 +303,8 @@ class BP_Activity_Share_Public {
 
 			$message = array(
 				'type' => 'success',
-				'message' => esc_html( $success_msg )
+				'message' => esc_html( $success_msg ),
+				'share_count' => $share_count
 			);
 		} else {
 			$error_msg = __( 'There is an error when sharing this update. Please try again.', 'bp-activity-share' );
