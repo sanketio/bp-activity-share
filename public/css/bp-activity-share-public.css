@@ -1,15 +1,15 @@
 .bp-activity-share-message {
-	margin: 20px 0 20px 80px;
+    margin: 20px 0 20px 80px;
 }
 
 .bp-activity-share-message.bp-share-success {
-	border: 1px solid rgba(234, 234, 234, 0.6);
-	padding: 10px;
-	border-left: 4px solid #46b450;
+    border: 1px solid rgba(234, 234, 234, 0.6);
+    padding: 10px;
+    border-left: 4px solid #46b450;
 }
 
 .bp-activity-share-message.bp-share-error {
-	border: 1px solid rgba(234, 234, 234, 0.6);
-	padding: 10px;
-	border-left: 4px solid #dc3232;
+    border: 1px solid rgba(234, 234, 234, 0.6);
+    padding: 10px;
+    border-left: 4px solid #dc3232;
 }

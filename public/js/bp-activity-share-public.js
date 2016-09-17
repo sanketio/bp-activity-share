@@ -22,13 +22,14 @@
 
 				$.post( ajaxurl, ajaxdata, function( response ) {
 					response = JSON.parse( response );
+					var msg_container = parent.find( '.bp-activity-share-message' );
 
 					that.children( 'span' ).text( response.share_count );
-					parent.find( '.bp-activity-share-message' ).addClass( 'bp-share-' + response.type ).text( response.message );
+					msg_container.addClass( 'bp-share-' + response.type ).text( response.message );
 					that.removeClass( 'loading' );
 
 					setTimeout( function( e ) {
-						parent.find( '.bp-activity-share-message' ).removeClass( 'bp-share-' + response.type ).text( '' );
+						msg_container.removeClass( 'bp-share-' + response.type ).text( '' );
 					}, 10000 );
 				} );
 

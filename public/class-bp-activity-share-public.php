@@ -43,6 +43,17 @@ class BP_Activity_Share_Public {
 	private $version;
 
 	/**
+	 * The suffix for css / js files.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  private
+	 *
+	 * @var     string  $suffix    The suffix for css / js files.
+	 */
+	private $suffix;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since   1.0.0
@@ -56,6 +67,7 @@ class BP_Activity_Share_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+		$this->suffix      = $this->bp_activity_share_check_script_debug();
 
 	}
 
@@ -68,7 +80,7 @@ class BP_Activity_Share_Public {
 	 */
 	public function bp_activity_share_enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bp-activity-share-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bp-activity-share-public' . $this->suffix . '.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -81,7 +93,7 @@ class BP_Activity_Share_Public {
 	 */
 	public function bp_activity_share_enqueue_style() {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bp-activity-share-public.css', '', $this->version );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bp-activity-share-public' . $this->suffix . '.css', '', $this->version );
 
 	}
 
@@ -95,8 +107,9 @@ class BP_Activity_Share_Public {
 	public function bp_activity_share_button_render() {
 
 		if ( true === $this->bp_activity_share_can_share() ) {
+			$share_count = $this->bp_activity_share_get_share_count();
 			?>
-			<a href="<?php $this->bp_activity_share_link(); ?>" class="button bp-activity-share bp-primary-action" title="<?php esc_attr_e( 'Share this activity', 'bp-activity-share' ); ?>"><?php printf( esc_html__( 'Share', 'bp-activity-share' ) . ' <span>%s</span>', esc_html__( $this->bp_activity_share_get_share_count() ) ); ?></a>
+			<a href="<?php $this->bp_activity_share_link(); ?>" class="button bp-activity-share bp-primary-action" title="<?php esc_attr_e( 'Share this activity', 'bp-activity-share' ); ?>"><?php printf( esc_html__( 'Share', 'bp-activity-share' ) . ' <span>%s</span>', esc_html( $share_count ) ); ?></a>
 			<?php
 		}
 
@@ -288,34 +301,40 @@ class BP_Activity_Share_Public {
 			// Maintaining user's shared activity.
 			$my_shared = bp_get_user_meta( $current_user_id, 'bp_shared_activities', true );
 
+			// Checking if $mu_shared is exist or not.
 			if ( empty( $my_shared ) || ! is_array( $my_shared ) ) {
 				$my_shared = array();
 			}
 
+			// Checking if $activity_id is already shared.
 			if ( ! in_array( $activity_id, $my_shared, true ) ) {
 				$my_shared[] = $activity_id;
 			}
 
+			// Updating user's shared activity meta.
 			bp_update_user_meta( $current_user_id, 'bp_shared_activities', $my_shared );
 
+			// Success message.
 			$success_msg = __( 'An update shared successfully.', 'bp-activity-share' );
 			$success_msg = apply_filters( 'bpas_success_message', $success_msg );
 
 			$message = array(
-				'type' => 'success',
-				'message' => esc_html( $success_msg ),
-				'share_count' => $share_count
+				'type'        => 'success',
+				'message'     => esc_html( $success_msg ),
+				'share_count' => $share_count,
 			);
 		} else {
+			// Error message.
 			$error_msg = __( 'There is an error when sharing this update. Please try again.', 'bp-activity-share' );
 			$error_msg = apply_filters( 'bpas_error_message', $error_msg );
 
 			$message = array(
 				'type' => 'error',
-				'message' => esc_html( $error_msg )
+				'message' => esc_html( $error_msg ),
 			);
 		}
 
+		// Returning JSON for message.
 		echo wp_json_encode( $message );
 
 		bp_core_redirect( wp_get_referer() );
@@ -334,6 +353,23 @@ class BP_Activity_Share_Public {
 		?>
 		<div class="bp-activity-share-message"></div>
 		<?php
+
+	}
+
+	/**
+	 * Checking if SCRIPT_DEBUG constant is defined or not and return $suffix
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  public
+	 *
+	 * @return  string
+	 */
+	public function bp_activity_share_check_script_debug() {
+
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && true === constant( 'SCRIPT_DEBUG' ) ) ? '' : '.min';
+
+		return $suffix;
 
 	}
 }
