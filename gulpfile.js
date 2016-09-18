@@ -5,8 +5,8 @@ var cssmin 			= require( 'gulp-cssmin' );
 var rename 			= require( 'gulp-rename' );
 var uglify 			= require( 'gulp-uglify' );
 var checktextdomain = require( 'gulp-checktextdomain' );
-var wpPot 			= require('gulp-wp-pot');
-var sort 			= require('gulp-sort');
+var wpPot 			= require( 'gulp-wp-pot' );
+var sort 			= require( 'gulp-sort' );
 
 gulp.task( 'sass', function() {
 	return gulp.src( 'public/css/sass/**/*.scss' )
@@ -48,7 +48,7 @@ gulp.task( 'checktextdomain', function() {
 } );
 
 gulp.task( 'makepot', function () {
-	return gulp.src('**/*.php')
+	return gulp.src( '**/*.php' )
 		.pipe( sort() )
 		.pipe( wpPot( {
 			domain: 'bp-activity-share',
