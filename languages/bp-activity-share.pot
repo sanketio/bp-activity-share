@@ -35,6 +35,6 @@ msgstr ""
 msgid "An update shared successfully."
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:328
+#: public/class-bp-activity-share-public.php:327
 msgid "There is an error when sharing this update. Please try again."
 msgstr ""
