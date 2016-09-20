@@ -319,9 +319,8 @@ class BP_Activity_Share_Public {
 			$success_msg = apply_filters( 'bpas_success_message', $success_msg );
 
 			$message = array(
-				'type'        => 'success',
-				'message'     => esc_html( $success_msg ),
-				'share_count' => $share_count,
+				'type'    => 'success',
+				'message' => esc_html( $success_msg )
 			);
 		} else {
 			// Error message.
@@ -329,13 +328,12 @@ class BP_Activity_Share_Public {
 			$error_msg = apply_filters( 'bpas_error_message', $error_msg );
 
 			$message = array(
-				'type' => 'error',
+				'type'    => 'error',
 				'message' => esc_html( $error_msg ),
 			);
 		}
 
-		// Returning JSON for message.
-		echo wp_json_encode( $message );
+		bp_core_add_message( $message['message'], $message['type'] );
 
 		bp_core_redirect( wp_get_referer() );
 

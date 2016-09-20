@@ -21,16 +21,7 @@
 				};
 
 				$.post( ajaxurl, ajaxdata, function( response ) {
-					response = JSON.parse( response );
-					var msg_container = parent.find( '.bp-activity-share-message' );
-
-					that.children( 'span' ).text( response.share_count );
-					msg_container.addClass( 'bp-share-' + response.type ).text( response.message );
 					that.removeClass( 'loading' );
-
-					setTimeout( function( e ) {
-						msg_container.removeClass( 'bp-share-' + response.type ).text( '' );
-					}, 10000 );
 				} );
 
 				return false;
