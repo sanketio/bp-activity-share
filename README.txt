@@ -13,6 +13,8 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 
 BP Activity Share plugin is useful for sharing an activity locally like we are sharing any post in FaceBook.
 
+If you really like this plugin, you can rate here -> https://wordpress.org/support/plugin/bp-activity-share/reviews#new-topic-0
+
 == Installation ==
 
 = From your WordPress dashboard =
@@ -32,6 +34,10 @@ BP Activity Share plugin is useful for sharing an activity locally like we are s
 = Can I use my existing WordPress theme? =
 
 Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress supported theme.
+
+== Screenshots ==
+
+1. Shared Activity
 
 == Changelog ==
 

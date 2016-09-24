@@ -17,6 +17,7 @@
  * Description:     This plugin shares BuddyPress Activity locally (i.e., in site only like we share Facebook posts).
  * Version:         1.0.0
  * Author:          Pranali, Sanket
+ * Author URI:      https://github.com/sanketio/bp-activity-share
  * License:         GPL-2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:     bp-activity-share
