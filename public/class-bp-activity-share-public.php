@@ -242,9 +242,9 @@ class BP_Activity_Share_Public {
 		$current_profile_link = bp_core_get_userlink( $current_user_id );
 
 		// Checking if current activity has any parent activity ID.
-		if ( 0 === $current_activity['activities'][0]->item_id ) {
+		if ( 0 === $current_activity['activities'][0]->item_id || 0 === $current_activity['activities'][0]->secondary_item_id || NULL === $current_activity['activities'][0]->secondary_item_id ) {
 			// User ID as a current activity's User ID
-			$user_id = $current_user_id;
+			$user_id = $current_activity['activities'][0]->user_id;
 
 			// Parent activity user's profile link.
 			$parent_profile_link = bp_core_get_userlink( $current_activity['activities'][0]->user_id );
@@ -261,7 +261,7 @@ class BP_Activity_Share_Public {
 			// Parent activity user's profile link.
 			$parent_profile_link = bp_core_get_userlink( $parent_activity['activities'][0]->user_id );
 
-			// Item id as an activity ID.
+			// Item id as an item ID.
 			$item_id = $current_activity['activities'][0]->item_id;
 		}
 
