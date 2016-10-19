@@ -5,7 +5,7 @@
 			this.bpasShareActivity();
 		},
 		bpasShareActivity: function() {
-			$( '.bp-activity-share' ).on( 'click', function() {
+			$( 'body' ).on( 'click', '.bp-activity-share', function() {
 				var that = $( this );
 
 				that.addClass( 'loading' );

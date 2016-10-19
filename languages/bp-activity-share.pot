@@ -15,6 +15,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: public/class-bp-activity-share-public.php:112
 msgid "Share this activity"
 msgstr ""
