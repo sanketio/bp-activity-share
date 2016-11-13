@@ -8,10 +8,16 @@ var checktextdomain = require( 'gulp-checktextdomain' );
 var wpPot 			= require( 'gulp-wp-pot' );
 var sort 			= require( 'gulp-sort' );
 
-gulp.task( 'sass', function() {
+gulp.task( 'public-css', function() {
 	return gulp.src( 'public/css/sass/**/*.scss' )
 		.pipe( sass() ) // Converts Sass to CSS with gulp-sass
 		.pipe( cssbeautify() ) // Beautifying CSS
+		.pipe( gulp.dest( 'public/css' ) )
+} );
+
+gulp.task( 'public-min-css', function() {
+	return gulp.src( 'public/css/sass/**/*.scss' )
+		.pipe( sass() ) // Converts Sass to CSS with gulp-sass
 		.pipe( cssmin() ) // CSS Minification
 		.pipe( rename( { suffix: '.min' } ) ) // Renaming minified CSS file
 		.pipe( gulp.dest( 'public/css' ) )
@@ -55,14 +61,15 @@ gulp.task( 'makepot', function () {
 			destFile:'bp-activity-share.pot',
 			package: 'BP Activity Share',
 			bugReport: '',
-			lastTranslator: 'Sanket Parmar <sanket.parmar11@gmail.com>',
-			team: 'Sanket Parmar <sanket.parmar11@gmail.com>'
+			lastTranslator: '',
+			team: ''
 		} ) )
 		.pipe( gulp.dest( 'languages/' ) );
 } );
 
 gulp.task( 'watch', function() {
-	gulp.watch( 'public/css/sass/**/*.scss', ['sass'] );
+	gulp.watch( 'public/css/sass/**/*.scss', ['public-css'] );
+	gulp.watch( 'public/css/sass/**/*.scss', ['public-min-css'] );
 	gulp.watch( 'public/js/bp-activity-share-public.js', ['minifyjs'] );
 } );
 

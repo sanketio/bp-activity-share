@@ -1,15 +1,42 @@
-.bp-activity-share-message {
-	margin: 20px 0 20px 80px;
-}
-
 .bp-activity-share-message.bp-share-success {
-	border: 1px solid rgba(234, 234, 234, 0.6);
-	padding: 10px;
-	border-left: 4px solid #46b450;
+    margin: 20px 0 20px 80px;
+    border: 1px solid rgba(234, 234, 234, 0.6);
+    padding: 10px;
+    border-left: 4px solid #46b450;
 }
 
 .bp-activity-share-message.bp-share-error {
-	border: 1px solid rgba(234, 234, 234, 0.6);
-	padding: 10px;
-	border-left: 4px solid #dc3232;
+    margin: 20px 0 20px 80px;
+    border: 1px solid rgba(234, 234, 234, 0.6);
+    padding: 10px;
+    border-left: 4px solid #dc3232;
+}
+
+.bpas-share-options-wrapper.hide {
+    display: none;
+}
+
+.bpas-share-options-wrapper.show {
+    display: inline-block;
+}
+
+.bpas-share-options-wrapper .button {
+    width: 32px;
+    padding: 4px !important;
+    display: inline-block !important;
+}
+
+.bpas-share-options-wrapper .button.bp-activity-share {
+    margin-left: 5px;
+}
+
+@media all and (max-width: 1169px) {
+    .bpas-share-options-wrapper {
+        margin-top: 10px;
+    }
+}
+
+.bpas-share-options {
+    max-width: 175px;
+    height: 32px;
 }
