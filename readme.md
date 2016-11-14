@@ -7,7 +7,7 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 **Tags:** [buddypress activity share](https://wordpress.org/plugins/tags/buddypress activity share), [buddypress share](https://wordpress.org/plugins/tags/buddypress share), [activity](https://wordpress.org/plugins/tags/activity), [buddypress](https://wordpress.org/plugins/tags/buddypress)  
 **Requires at least:** WordPress 4.0  
 **Tested up to:** WordPress 4.6.1  
-**Stable tag:** 1.0.1  
+**Stable tag:** 1.1.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 ## Description ##
@@ -43,18 +43,20 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Changelog ##
 
+### 1.1.0 - November 15, 2016 ###
+* New - Share activity to the BuddyPress groups
+
 ### 1.0.1 - October 19, 2016 ###
-* Inital Release
-* Share any existing activity locally
+* Fix - sharing an activity which is already shared without page refresh
 
 ### 1.0.0 ###
-* Inital Release
+* Initial Release
 * Share any existing activity locally
 
 
 ## Upgrade Notice ##
 
-### 1.0.1 ###
-Fixed issue when sharing an activity which is already shared without page refresh
+### 1.1.0 ###
+Share activity to the BuddyPress groups
 
 
