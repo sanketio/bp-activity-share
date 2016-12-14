@@ -45,5 +45,5 @@ after_script:
 
 branches:
   only:
-    - travis-ci
+    - develop
     - /^release\/.*$/
