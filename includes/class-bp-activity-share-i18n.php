@@ -5,19 +5,18 @@
  * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/includes
+ * @subpackage  BP_Activity_Share / includes
  */
 
 /**
  * Define the internationalization functionality
  *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
+ * Loads and defines the internationalization files for this plugin so that it is ready for translation.
  *
  * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/includes
+ * @subpackage  BP_Activity_Share / includes
  */
 class BP_Activity_Share_i18n {
 

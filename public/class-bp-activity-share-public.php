@@ -5,7 +5,7 @@
  * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/public
+ * @subpackage  BP_Activity_Share / public
  */
 
 /**
@@ -16,18 +16,18 @@
  * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/public
+ * @subpackage  BP_Activity_Share / public
  */
 class BP_Activity_Share_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since   1.0.0
+	 * @since	1.0.0
 	 *
 	 * @access  private
 	 *
-	 * @var     string  $plugin_name    The ID of this plugin.
+	 * @var     string	$plugin_name	The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -38,7 +38,7 @@ class BP_Activity_Share_Public {
 	 *
 	 * @access  private
 	 *
-	 * @var     string  $version    The current version of this plugin.
+	 * @var     string  $version	The current version of this plugin.
 	 */
 	private $version;
 
@@ -60,8 +60,8 @@ class BP_Activity_Share_Public {
 	 *
 	 * @access  public
 	 *
-	 * @param   string $plugin_name    The name of the plugin.
-	 * @param   string $version        The version of this plugin.
+	 * @param   string	$plugin_name    The name of the plugin.
+	 * @param   string 	$version        The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -161,7 +161,7 @@ class BP_Activity_Share_Public {
 	 *
 	 * @access  private
 	 *
-	 * @return  bool    $can_share
+	 * @return  bool	$can_share
 	 */
 	private function bp_activity_share_can_share() {
 
@@ -235,7 +235,7 @@ class BP_Activity_Share_Public {
 	 *
 	 * @global  object  $activities_template
 	 *
-	 * @return int
+	 * @return 	int
 	 */
 	private function bp_activity_share_get_share_count() {
 
@@ -244,215 +244,18 @@ class BP_Activity_Share_Public {
 		// Checking current activity's component.
 		if ( 'activity' === $activities_template->activity->component ) {
 			$item_id = ( 0 === $activities_template->activity->item_id ) ? $activities_template->activity->id : $activities_template->activity->item_id;
-		} else if ( 'groups' === $activities_template->activity->component ) {
+		} elseif ( 'groups' === $activities_template->activity->component ) {
 			$item_id = bp_activity_get_meta( $activities_template->activity->id, 'bp_share_activity_main_parent_id', true );
+
+			if ( empty( $item_id ) ) {
+				$item_id = $activities_template->activity->id;
+			}
 		}
 
 		// Getting activity share count.
 		$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count', true );
 
 		return (int) $share_count;
-
-	}
-
-	/**
-	 * Share activity action
-	 *
-	 * @since	1.0.0
-	 *
-	 * @access	public
-	 *
-	 * @return bool
-	 */
-	public function bp_activity_action_bp_share_activity() {
-
-		if ( ! is_user_logged_in() || ! bp_is_activity_component() ) {
-			return false;
-		}
-
-		// Check the nonce.
-		check_admin_referer( 'bpshare_activity', '_wpnonce' );
-
-		// Activity ID of activity being share.
-		$current_activity_id = filter_input( INPUT_POST, 'act_id', FILTER_VALIDATE_INT );
-
-		// Where to share an activity.
-		$share_to = filter_input( INPUT_POST, 'share_to', FILTER_SANITIZE_STRING );
-
-		// Current logged in User's ID.
-		$current_user_id = bp_loggedin_user_id();
-
-		// Getting activity using Activity ID.
-		$current_activity = bp_activity_get_specific( array( 'activity_ids' => $current_activity_id ) );
-
-		// Current user's profile link.
-		$current_profile_link = bp_core_get_userlink( $current_user_id );
-
-		// Checking if sharing is in site-wide activity or in the group.
-		if ( 'bpas-sitewide-activity' === $share_to ) {
-			// If current activity's component is activity.
-			if ( 'activity' === $current_activity['activities'][0]->component ) {
-				if ( 0 === $current_activity['activities'][0]->item_id || 0 === $current_activity['activities'][0]->secondary_item_id || NULL === $current_activity['activities'][0]->secondary_item_id ) {
-					// User ID as a current activity's User ID
-					$user_id = $current_activity['activities'][0]->user_id;
-
-					// Item id as an activity ID.
-					$item_id = $current_activity['activities'][0]->id;
-				} else {
-					$activity_id = $current_activity['activities'][0]->item_id;
-
-					// Getting parent activity using Item ID.
-					$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $activity_id ) );
-
-					// User ID as a parent activity's User ID.
-					$user_id = $parent_activity['activities'][0]->user_id;
-
-					// Item id as an item ID.
-					$item_id = $current_activity['activities'][0]->item_id;
-				}
-			} elseif ( 'groups' === $current_activity['activities'][0]->component ) {
-				// Getting main parent activity id.
-				$main_parent_id = bp_activity_get_meta( $current_activity['activities'][0]->id, 'bp_share_activity_main_parent_id', true );
-
-				if ( ! empty( $main_parent_id ) ) {
-					// Getting parent activity using Item ID.
-					$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $main_parent_id ) );
-
-					// User ID as a parent activity's User ID.
-					$user_id = $parent_activity['activities'][0]->user_id;
-
-					// Storing main parent id as an item id.
-					$item_id = $main_parent_id;
-				} else {
-					// User ID as a current activity's User ID
-					$user_id = $current_activity['activities'][0]->user_id;
-
-					// Storing current activity id as an item id.
-					$item_id = $current_activity['activities'][0]->id;
-				}
-			}
-
-			// Parent activity user's profile link.
-			$parent_profile_link = bp_core_get_userlink( $user_id );
-
-			if ( $current_user_id === $user_id ) {
-				$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
-			} else {
-				$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
-			}
-
-			$component = 'activity';
-		} else {
-			$group_id       = explode( '-', $share_to );
-			$group          = groups_get_group( array( 'group_id' => $group_id[1] ) );
-			$group_link     = '<a href="' . esc_attr( bp_get_group_permalink( $group ) ) . '">' . esc_attr( $group->name ) . '</a>';
-			$main_parent_id = bp_activity_get_meta( $current_activity['activities'][0]->id, 'bp_share_activity_main_parent_id', true );
-
-			if ( ! empty( $main_parent_id ) ) {
-				// Getting parent activity using Item ID.
-				$parent_activity = bp_activity_get_specific( array( 'activity_ids' => $main_parent_id ) );
-
-				// User ID as a parent activity's User ID.
-				$user_id = $parent_activity['activities'][0]->user_id;
-			} else {
-				// User ID as a current activity's User ID
-				$user_id = $current_activity['activities'][0]->user_id;
-			}
-
-			// Item id as an item ID.
-			$item_id = $group_id[1];
-
-			// Parent activity user's profile link.
-			$parent_profile_link = bp_core_get_userlink( $user_id );
-
-			// If user is sharing his/her own activity.
-			if ( $current_user_id === $user_id ) {
-				$action = sprintf( esc_html__( '%1$s shared an update in the group %2$s', 'bp-activity-share' ), $current_profile_link, $group_link );
-			} else {
-				$action = sprintf( esc_html__( '%1$s shared %2$s\'s update in the group %3$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, $group_link );
-			}
-
-			$component = 'groups';
-		}
-
-		$secondary_item_id = ( 0 === $current_activity['activities'][0]->secondary_item_id ) ? $current_activity['activities'][0]->id : $current_activity_id;
-
-		// Prepare activity arguments.
-		$activity_args = array(
-			'user_id'           => $current_user_id,
-			'action'            => $action,
-			'component'			=> $component,
-			'content'           => $current_activity['activities'][0]->content,
-			'type'              => 'bp_activity_share',
-			'primary_link'      => $current_profile_link,
-			'secondary_item_id' => $secondary_item_id,
-			'item_id' 			=> $item_id,
-		);
-
-		$activity_id = bp_activity_add( $activity_args );
-
-		if ( ! empty( $activity_id ) ) {
-			// Maintaining share activity count.
-			if ( 'bpas-sitewide-activity' === $share_to ) {
-				$share_count = bp_activity_get_meta( $item_id, 'bp_share_activity_count', true );
-				$share_count = ! empty( $share_count ) ? (int) $share_count + 1 : 1;
-
-				bp_activity_update_meta( $item_id, 'bp_share_activity_count', $share_count );
-				bp_activity_update_meta( $activity_id, 'bp_share_activity_main_parent_id', $item_id );
-			} else {
-				$main_parent_id = bp_activity_get_meta( $current_activity['activities'][0]->id, 'bp_share_activity_main_parent_id', true );
-
-				if ( ! empty( $main_parent_id ) ) {
-					$parent_act_id = $main_parent_id;
-				} else {
-					$parent_act_id = $current_activity['activities'][0]->id;
-				}
-
-				$share_count = bp_activity_get_meta( $parent_act_id, 'bp_share_activity_count', true );
-				$share_count = ! empty( $share_count ) ? (int) $share_count + 1 : 1;
-
-				bp_activity_update_meta( $parent_act_id, 'bp_share_activity_count', $share_count );
-				bp_activity_update_meta( $activity_id, 'bp_share_activity_main_parent_id', $parent_act_id );
-			}
-
-			// Maintaining user's shared activity.
-			$my_shared = bp_get_user_meta( $current_user_id, 'bp_shared_activities', true );
-
-			// Checking if $mu_shared is exist or not.
-			if ( empty( $my_shared ) || ! is_array( $my_shared ) ) {
-				$my_shared = array();
-			}
-
-			// Checking if $activity_id is already shared.
-			if ( ! in_array( $activity_id, $my_shared, true ) ) {
-				$my_shared[] = $activity_id;
-			}
-
-			// Updating user's shared activity meta.
-			bp_update_user_meta( $current_user_id, 'bp_shared_activities', $my_shared );
-
-			// Success message.
-			$success_msg = __( 'An update shared successfully.', 'bp-activity-share' );
-			$success_msg = apply_filters( 'bpas_success_message', $success_msg );
-
-			$message = array(
-				'type'    => 'success',
-				'message' => esc_html( $success_msg )
-			);
-		} else {
-			// Error message.
-			$error_msg = __( 'There is an error when sharing this update. Please refresh page and try again.', 'bp-activity-share' );
-			$error_msg = apply_filters( 'bpas_error_message', $error_msg );
-
-			$message = array(
-				'type'    => 'error',
-				'message' => esc_html( $error_msg ),
-			);
-		}
-
-		bp_core_add_message( $message['message'], $message['type'] );
-
-		bp_core_redirect( wp_get_referer() );
 
 	}
 
@@ -485,6 +288,102 @@ class BP_Activity_Share_Public {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && true === constant( 'SCRIPT_DEBUG' ) ) ? '' : '.min';
 
 		return $suffix;
+
+	}
+
+	/**
+	 * Update share count and item_id & secondary_item_id
+	 *
+	 * @since	1.2.0
+	 *
+	 * @access	public
+	 *
+	 * @param 	int		$activity_id	Activity ID which is being delete.
+	 * @param 	int		$user_id		User ID of an activity.
+	 */
+	public function bp_activity_share_delete_activity( $activity_id, $user_id ) {
+
+		global $wpdb;
+
+		// Activity & Activity Meta table names.
+		$activity_table = $wpdb->prefix . 'bp_activity';
+		$activity_meta_table = $wpdb->prefix . 'bp_activity_meta';
+
+		// Update item_id when activity is being delete.
+		$data = array(
+			'item_id' => 0,
+		);
+		$where = array(
+			'item_id' => $activity_id,
+			'type' 	  => 'bp_activity_share',
+		);
+
+		$wpdb->update( $activity_table, $data, $where );
+
+		// Update secondary_item_id when activity is being delete.
+		$data = array(
+			'secondary_item_id' => 0,
+		);
+		$where = array(
+			'secondary_item_id' => $activity_id,
+			'type' 				=> 'bp_activity_share',
+		);
+
+		$wpdb->update( $activity_table, $data, $where );
+
+		// Decrease activity share count by 1.
+		$orig_parent_id = bp_activity_get_meta( $activity_id, 'bp_share_activity_main_parent_id', true );
+
+		// Checking if an activity has any parent activity id.
+		if ( ! empty( $orig_parent_id ) ) {
+			$share_count = bp_activity_get_meta( $orig_parent_id, 'bp_share_activity_count', true );
+
+			// Checking if share count is exists in meta.
+			if ( ! empty( $share_count ) ) {
+				$share_count = (int) $share_count - 1;
+
+				if ( $share_count < 0 ) {
+					$share_count = 0;
+				}
+
+				// Update activity share count.
+				bp_activity_update_meta( $orig_parent_id, 'bp_share_activity_count', $share_count );
+			}
+		}
+
+		// Remove original parent activity if main activity is being delete.
+		$select_query = "SELECT * FROM {$activity_meta_table} WHERE meta_key='bp_share_activity_main_parent_id' AND meta_value=" . $activity_id;
+		$results 	  = $wpdb->get_results( $select_query );
+
+		// Checking if rows are exists.
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $meta ) {
+				// Delete `bp_share_activity_main_parent_id` meta.
+				bp_activity_delete_meta( $meta->activity_id, 'bp_share_activity_main_parent_id' );
+			}
+		}
+
+		// Maintaining user's shared activity.
+		$user_shared = bp_get_user_meta( $user_id, 'bp_shared_activities', true );
+
+		// Checking if $activity_id is already shared.
+		if ( ! empty( $user_shared ) && in_array( $activity_id, $user_shared, true ) ) {
+			foreach ( $user_shared as $key => $act_id ) {
+				if ( (int) $activity_id === (int) $act_id ) {
+					unset( $user_shared[ $key ] );
+				}
+			}
+		}
+
+		if ( ! empty( $user_shared ) ) {
+			$user_shared = array_values( $user_shared );
+
+			// Updating user's shared activity meta.
+			bp_update_user_meta( $user_id, 'bp_shared_activities', $user_shared );
+		} else {
+			// Delete user's shared activity meta.
+			bp_delete_user_meta( $user_id, 'bp_shared_activities' );
+		}
 
 	}
 }

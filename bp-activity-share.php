@@ -30,8 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * The core plugin class that is used to define internationalization, and public-facing site hooks.
  */
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-bp-activity-share.php';
 
@@ -42,7 +41,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/class-bp-activity-share.php
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since   1.0.0
  */
 function run_bp_activity_share() {
 

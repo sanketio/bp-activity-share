@@ -19,6 +19,7 @@
 				var that = $( this );
 
 				that.parent( '.bpas-share-options-wrapper' ).removeClass( 'show' ).addClass( 'hide' );
+				that.siblings( '.bpas-share-options' ).val( 'bpas-sitewide-activity' );
 			} );
 
 			$( 'body' ).on( 'click', '.bp-activity-share', function() {
@@ -41,6 +42,7 @@
 				$.post( ajaxurl, ajaxdata, function( response ) {
 					that.removeClass( 'loading' );
 					that.parent( '.bpas-share-options-wrapper' ).removeClass( 'show' ).addClass( 'hide' );
+					that.prev( '.bpas-share-options' ).val( 'bpas-sitewide-activity' );
 				} );
 
 				return false;

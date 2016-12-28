@@ -5,28 +5,25 @@
  * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/includes
+ * @subpackage  BP_Activity_Share / includes
  */
 
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
+ * This is used to define internationalization, and public-facing site hooks.
  *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
+ * Also maintains the unique identifier of this plugin as well as the current version of the plugin.
  *
- * @since   	1.0.0
+ * @since       1.0.0
  *
  * @package     BP_Activity_Share
- * @subpackage  BP_Activity_Share/includes
+ * @subpackage  BP_Activity_Share / includes
  */
 class BP_Activity_Share {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
+	 * The loader that's responsible for maintaining and registering all hooks that power the plugin.
 	 *
 	 * @since   1.0.0
 	 *
@@ -43,7 +40,7 @@ class BP_Activity_Share {
 	 *
 	 * @access  protected
 	 *
-	 * @var     string  $plugin_name    The string used to uniquely identify this plugin.
+	 * @var     string      $plugin_name    The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -54,7 +51,7 @@ class BP_Activity_Share {
 	 *
 	 * @access  protected
 	 *
-	 * @var     string  $version    The current version of the plugin.
+	 * @var     string      $version    The current version of the plugin.
 	 */
 	protected $version;
 
@@ -62,8 +59,7 @@ class BP_Activity_Share {
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
+	 * Load the dependencies, define the locale, and set the hooks for the public-facing side of the site.
 	 *
 	 * @since   1.0.0
 	 *
@@ -77,6 +73,7 @@ class BP_Activity_Share {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
+		$this->define_public_ajax_hooks();
 
 	}
 
@@ -85,12 +82,12 @@ class BP_Activity_Share {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Plugin_Name_Loader.    Orchestrates the hooks of the plugin.
-	 * - Plugin_Name_i18n.      Defines internationalization functionality.
-	 * - Plugin_Name_Public. 	Defines all hooks for the public side of the site.
+	 * - BP_Activity_Share_Loader.      Orchestrates the hooks of the plugin.
+	 * - BP_Activity_Share_i18n.        Defines internationalization functionality.
+	 * - BP_Activity_Share_Public.      Defines all hooks for the public side of the site.
+	 * - BP_Activity_Share_Public_Ajax. Defines all hooks for the public side of the site.
 	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
+	 * Create an instance of the loader which will be used to register the hooks with WordPress.
 	 *
 	 * @since   1.0.0
 	 *
@@ -99,22 +96,24 @@ class BP_Activity_Share {
 	private function load_dependencies() {
 
 		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
+		 * The class responsible for orchestrating the actions and filters of the core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bp-activity-share-loader.php';
 
 		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
+		 * The class responsible for defining internationalization functionality of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bp-activity-share-i18n.php';
 
 		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
+		 * The class responsible for defining all actions that occur in the public-facing side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bp-activity-share-public.php';
+
+		/**
+		 * The class responsible for defining all ajax actions that occur in the public-facing side of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bp-activity-share-public-ajax.php';
 
 		$this->loader = new BP_Activity_Share_Loader();
 
@@ -123,8 +122,7 @@ class BP_Activity_Share {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the BP_Activity_Share_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
+	 * Uses the BP_Activity_Share_i18n class in order to set the domain and to register the hook with WordPress.
 	 *
 	 * @since   1.0.0
 	 *
@@ -139,11 +137,11 @@ class BP_Activity_Share {
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
+	 * Register all of the hooks related to the public-facing functionality of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since   1.0.0
+	 *
+	 * @access  private
 	 */
 	private function define_public_hooks() {
 
@@ -153,8 +151,24 @@ class BP_Activity_Share {
 		$this->loader->add_action( 'wp_enqueue_scripts', $bp_activity_share_public, 'bp_activity_share_enqueue_style' );
 		$this->loader->add_action( 'bp_activity_entry_meta', $bp_activity_share_public, 'bp_activity_share_button_render' );
 		$this->loader->add_action( 'bp_before_activity_entry_comments', $bp_activity_share_public, 'bp_activity_share_message' );
-		$this->loader->add_action( 'wp_ajax_bp_share_activity', $bp_activity_share_public, 'bp_activity_action_bp_share_activity' );
-		$this->loader->add_action( 'wp_ajax_nopriv_bp_share_activity', $bp_activity_share_public, 'bp_activity_action_bp_share_activity' );
+		$this->loader->add_action( 'bp_activity_before_action_delete_activity', $bp_activity_share_public, 'bp_activity_share_delete_activity', 10, 2 );
+
+	}
+
+	/**
+	 * Register all of the ajax actions related to the public-facing functionality of the plugin.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  private
+	 */
+	private function define_public_ajax_hooks() {
+
+		$bp_activity_share_public_ajax = new BP_Activity_Share_Public_Ajax();
+
+		$this->loader->add_action( 'wp_ajax_bp_share_activity', $bp_activity_share_public_ajax, 'bp_activity_action_bp_share_activity' );
+		$this->loader->add_action( 'wp_ajax_nopriv_bp_share_activity', $bp_activity_share_public_ajax, 'bp_activity_action_bp_share_activity' );
+
 	}
 
 	/**
@@ -171,8 +185,7 @@ class BP_Activity_Share {
 	}
 
 	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
+	 * The name of the plugin used to uniquely identify it within the context of WordPress and to define internationalization functionality.
 	 *
 	 * @since   1.0.0
 	 *

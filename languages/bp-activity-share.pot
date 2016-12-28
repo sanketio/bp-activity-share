@@ -14,6 +14,30 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: public/class-bp-activity-share-public-ajax.php:113
+msgid "%1$s shared an update"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:115
+msgid "%1$s shared %2$s's update"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:144
+msgid "%1$s shared an update in the group %2$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:146
+msgid "%1$s shared %2$s's update in the group %3$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:209
+msgid "An update shared successfully."
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:218
+msgid "There is an error when sharing this update. Please refresh page and try again."
+msgstr ""
+
 #: public/class-bp-activity-share-public.php:116, public/class-bp-activity-share-public.php:145
 msgid "Share this activity"
 msgstr ""
@@ -32,28 +56,4 @@ msgstr ""
 
 #: public/class-bp-activity-share-public.php:148
 msgid "Cancel"
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:339
-msgid "%1$s shared an update"
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:341
-msgid "%1$s shared %2$s's update"
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:370
-msgid "%1$s shared an update in the group %2$s"
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:372
-msgid "%1$s shared %2$s's update in the group %3$s"
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:435
-msgid "An update shared successfully."
-msgstr ""
-
-#: public/class-bp-activity-share-public.php:444
-msgid "There is an error when sharing this update. Please refresh page and try again."
 msgstr ""
