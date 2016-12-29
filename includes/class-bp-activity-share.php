@@ -68,7 +68,7 @@ class BP_Activity_Share {
 	public function __construct() {
 
 		$this->plugin_name = 'bp-activity-share';
-		$this->version     = '1.1.0';
+		$this->version     = '1.2.0';
 
 		$this->load_dependencies();
 		$this->set_locale();

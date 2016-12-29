@@ -2,8 +2,8 @@
 Contributors: sanket.parmar, pranalipatel
 Tags: buddypress activity share, buddypress share, activity, buddypress
 Requires at least: WordPress 4.0
-Tested up to: WordPress 4.6.1
-Stable tag: 1.1.0
+Tested up to: WordPress 4.7
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,9 +37,15 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 == Screenshots ==
 
-1. Shared Activity
+1. Share Activity
+2. Shared Activity
 
 == Changelog ==
+
+= 1.2.0 - November 15, 2016 =
+* Fix - PHP Notice when sharing shared activity after deleting parent activity
+
+* New - Decrease share count when deleting shared activity
 
 = 1.1.0 - November 15, 2016 =
 * New - Share activity to the BuddyPress groups
@@ -47,11 +53,11 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 = 1.0.1 - October 19, 2016 =
 * Fix - sharing an activity which is already shared without page refresh
 
-= 1.0.0 =
+= 1.0.0 - September 24, 2016 =
 * Initial Release
 * Share any existing activity locally
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-Share activity to the BuddyPress groups
+= 1.2.0 =
+Fix - PHP Notice when sharing shared activity after deleting parent activity, New - Decrease share count when deleting shared activity.
