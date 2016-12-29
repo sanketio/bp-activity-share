@@ -6,9 +6,11 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 **Contributors:** [sanket.parmar](https://profiles.wordpress.org/sanket.parmar), [pranalipatel](https://profiles.wordpress.org/pranalipatel)  
 **Tags:** [buddypress activity share](https://wordpress.org/plugins/tags/buddypress activity share), [buddypress share](https://wordpress.org/plugins/tags/buddypress share), [activity](https://wordpress.org/plugins/tags/activity), [buddypress](https://wordpress.org/plugins/tags/buddypress)  
 **Requires at least:** WordPress 4.0  
-**Tested up to:** WordPress 4.6.1  
-**Stable tag:** 1.1.0  
+**Tested up to:** WordPress 4.7  
+**Stable tag:** 1.2.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
+
+[![Build Status](https://travis-ci.org/sanketio/bp-activity-share.svg?branch=master)](https://travis-ci.org/sanketio/bp-activity-share) 
 
 ## Description ##
 
@@ -37,11 +39,20 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Screenshots ##
 
+### Share Activity
+
+![Share Activity](assets/screenshot-1.png)
+
 ### Shared Activity
 
-![Shared Activity](assets/screenshot-1.png)
+![Shared Activity](assets/screenshot-2.png)
 
 ## Changelog ##
+
+### 1.2.0 - November 15, 2016 ###
+* Fix - PHP Notice when sharing shared activity after deleting parent activity
+
+* New - Decrease share count when deleting shared activity
 
 ### 1.1.0 - November 15, 2016 ###
 * New - Share activity to the BuddyPress groups
@@ -49,14 +60,14 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 ### 1.0.1 - October 19, 2016 ###
 * Fix - sharing an activity which is already shared without page refresh
 
-### 1.0.0 ###
+### 1.0.0 - September 24, 2016 ###
 * Initial Release
 * Share any existing activity locally
 
 
 ## Upgrade Notice ##
 
-### 1.1.0 ###
-Share activity to the BuddyPress groups
+### 1.2.0 ###
+Fix - PHP Notice when sharing shared activity after deleting parent activity, New - Decrease share count when deleting shared activity.
 
 
