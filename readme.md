@@ -49,7 +49,7 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Changelog ##
 
-### 1.2.0 - November 15, 2016 ###
+### 1.2.0 - December 29, 2016 ###
 * Fix - PHP Notice when sharing shared activity after deleting parent activity
 
 * New - Decrease share count when deleting shared activity
