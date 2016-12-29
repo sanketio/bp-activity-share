@@ -142,6 +142,7 @@ rsync -avz --delete --delete-excluded \
 	--exclude '/deploy' \
 	--exclude '/svn-url' \
 	--exclude '/tests' \
+	--exclude '/bin' \
 	--exclude 'phpunit.xml*' \
 	--exclude 'phpcs.ruleset.xml' \
 	--exclude 'public/css/sass*' \
