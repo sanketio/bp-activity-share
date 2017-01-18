@@ -72,6 +72,7 @@ class BP_Activity_Share {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_public_ajax_hooks();
 
@@ -106,6 +107,11 @@ class BP_Activity_Share {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bp-activity-share-i18n.php';
 
 		/**
+		 * The class responsible for defining all actions that occur in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bp-activity-share-admin.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bp-activity-share-public.php';
@@ -133,6 +139,23 @@ class BP_Activity_Share {
 		$plugin_i18n = new BP_Activity_Share_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the admin area functionality of the plugin.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @access  private
+	 */
+	private function define_admin_hooks() {
+
+		$plugin_admin = new BP_Activity_Share_Admin( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'bp_register_admin_settings', $plugin_admin, 'bp_activity_share_activity_types', 11 );
+
+		$this->loader->add_filter( 'bp_activity_get_types', $plugin_admin, 'bpas_add_share_type' );
 
 	}
 
