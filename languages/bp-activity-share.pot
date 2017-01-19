@@ -26,79 +26,79 @@ msgstr ""
 msgid "BP Activity Share"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:170
+#: public/class-bp-activity-share-public-ajax.php:179
 msgid "Photo"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:171
+#: public/class-bp-activity-share-public-ajax.php:180
 msgid "Photos"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:173
+#: public/class-bp-activity-share-public-ajax.php:182
 msgid "Video"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:174
+#: public/class-bp-activity-share-public-ajax.php:183
 msgid "Videos"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:176, public/class-bp-activity-share-public-ajax.php:177
+#: public/class-bp-activity-share-public-ajax.php:185, public/class-bp-activity-share-public-ajax.php:186
 msgid "Music"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:187
+#: public/class-bp-activity-share-public-ajax.php:198
 msgid "%1$s shared a %2$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:189
+#: public/class-bp-activity-share-public-ajax.php:200
 msgid "%1$s shared %2$s's %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:193
+#: public/class-bp-activity-share-public-ajax.php:205
 msgid "%1$s shared %2$d %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:195
+#: public/class-bp-activity-share-public-ajax.php:207
 msgid "%1$s shared %2$s's %3$d %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:201
+#: public/class-bp-activity-share-public-ajax.php:214
 msgid "%1$s shared a %2$s in the group %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:203
+#: public/class-bp-activity-share-public-ajax.php:216
 msgid "%1$s shared %2$s's %3$s in the group %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:207
+#: public/class-bp-activity-share-public-ajax.php:221
 msgid "%1$s shared %2$d %3$s in the group %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:209
+#: public/class-bp-activity-share-public-ajax.php:223
 msgid "%1$s shared %2$s's %3$d %4$s in the group %5$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:218
+#: public/class-bp-activity-share-public-ajax.php:234
 msgid "%1$s shared an update"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:220
+#: public/class-bp-activity-share-public-ajax.php:236
 msgid "%1$s shared %2$s's update"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:227
+#: public/class-bp-activity-share-public-ajax.php:243
 msgid "%1$s shared an update in the group %2$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:229
+#: public/class-bp-activity-share-public-ajax.php:245
 msgid "%1$s shared %2$s's update in the group %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:293
+#: public/class-bp-activity-share-public-ajax.php:309
 msgid "An update shared successfully."
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:302
+#: public/class-bp-activity-share-public-ajax.php:318
 msgid "There is an error when sharing this update. Please refresh page and try again."
 msgstr ""
 
