@@ -6,8 +6,8 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 **Contributors:** [sanket.parmar](https://profiles.wordpress.org/sanket.parmar), [pranalipatel](https://profiles.wordpress.org/pranalipatel)  
 **Tags:** [buddypress activity share](https://wordpress.org/plugins/tags/buddypress activity share), [buddypress share](https://wordpress.org/plugins/tags/buddypress share), [activity](https://wordpress.org/plugins/tags/activity), [buddypress](https://wordpress.org/plugins/tags/buddypress)  
 **Requires at least:** WordPress 4.0  
-**Tested up to:** WordPress 4.7  
-**Stable tag:** 1.2.0  
+**Tested up to:** WordPress 4.7.1  
+**Stable tag:** 1.3.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 [![Build Status](https://travis-ci.org/sanketio/bp-activity-share.svg?branch=master)](https://travis-ci.org/sanketio/bp-activity-share) 
@@ -49,6 +49,10 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Changelog ##
 
+### 1.3.0 - January 19, 2017 ###
+* New - Admin option to select Activity Types
+* New - [rtMedia](https://wordpress.org/plugins/buddypress-media/) support
+
 ### 1.2.0 - December 29, 2016 ###
 * Fix - PHP Notice when sharing shared activity after deleting parent activity
 
@@ -67,7 +71,7 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Upgrade Notice ##
 
-### 1.2.0 ###
-Fix - PHP Notice when sharing shared activity after deleting parent activity, New - Decrease share count when deleting shared activity.
+### 1.3.0 ###
+New - Admin option to select Activity Types, rtMedia Support
 
 

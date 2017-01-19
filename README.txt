@@ -2,7 +2,7 @@
 Contributors: sanket.parmar, pranalipatel
 Tags: buddypress activity share, buddypress share, activity, buddypress
 Requires at least: WordPress 4.0
-Tested up to: WordPress 4.7
+Tested up to: WordPress 4.7.1
 Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
