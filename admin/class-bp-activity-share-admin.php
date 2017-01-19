@@ -84,7 +84,7 @@ class BP_Activity_Share_Admin {
 			// Add settings fields.
 			add_settings_field(
 				'bpas-allowed-types',
-				__( 'Sharable Activity types', 'bp-reshare' ),
+				__( 'Sharable Activity types', 'bp-activity-share' ),
 				array( $this, 'bp_activity_share_settings_field' ),
 				'buddypress',
 				'bp_activity_share_section'
@@ -165,7 +165,7 @@ class BP_Activity_Share_Admin {
 	 *
 	 * @param 	bool 	$option
 	 *
-	 * @return 	array|bool
+	 * @return 	array
 	 */
 	public function bp_activity_share_types_sanitize( $option = false ) {
 

@@ -170,8 +170,8 @@ class BP_Activity_Share_Public {
 		// Determine activity type name.
 		$activity_type = bp_get_activity_type();
 
-		// Supported activity types array.
-		$activity_supported_types = array( 'activity_update', 'bp_activity_share' );
+		// Get allowed activity types.
+		$activity_supported_types = get_option( 'bpas-allowed-types', array( 'activity_update', 'bp_activity_share' ) );
 		$activity_supported_types = apply_filters( 'bp_activity_share_supported_types', $activity_supported_types );
 
 		// Checking if activity is supported for share.
@@ -244,7 +244,7 @@ class BP_Activity_Share_Public {
 		// Checking current activity's component.
 		if ( 'activity' === $activities_template->activity->component ) {
 			$item_id = ( 0 === $activities_template->activity->item_id ) ? $activities_template->activity->id : $activities_template->activity->item_id;
-		} elseif ( 'groups' === $activities_template->activity->component ) {
+		} elseif ( in_array( $activities_template->activity->component, array( 'groups', 'profile' ), true ) ) {
 			$item_id = bp_activity_get_meta( $activities_template->activity->id, 'bp_share_activity_main_parent_id', true );
 
 			if ( empty( $item_id ) ) {

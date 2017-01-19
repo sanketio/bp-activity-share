@@ -1,4 +1,4 @@
-# Copyright (C) 2016 BP Activity Share
+# Copyright (C) 2017 BP Activity Share
 # This file is distributed under the same license as the BP Activity Share package.
 msgid ""
 msgstr ""
@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
@@ -14,27 +14,91 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: public/class-bp-activity-share-public-ajax.php:113
-msgid "%1$s shared an update"
+#: admin/class-bp-activity-share-admin.php:79
+msgid "BP Activity Share Settings"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:115
-msgid "%1$s shared %2$s's update"
+#: admin/class-bp-activity-share-admin.php:87
+msgid "Sharable Activity types"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:144
-msgid "%1$s shared an update in the group %2$s"
+#: admin/class-bp-activity-share-admin.php:200
+msgid "BP Activity Share"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:146
-msgid "%1$s shared %2$s's update in the group %3$s"
+#: public/class-bp-activity-share-public-ajax.php:170
+msgid "Photo"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:171
+msgid "Photos"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:173
+msgid "Video"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:174
+msgid "Videos"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:176, public/class-bp-activity-share-public-ajax.php:177
+msgid "Music"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:187
+msgid "%1$s shared a %2$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:189
+msgid "%1$s shared %2$s's %3$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:193
+msgid "%1$s shared %2$d %3$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:195
+msgid "%1$s shared %2$s's %3$d %4$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:201
+msgid "%1$s shared a %2$s in the group %3$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:203
+msgid "%1$s shared %2$s's %3$s in the group %4$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:207
+msgid "%1$s shared %2$d %3$s in the group %4$s"
 msgstr ""
 
 #: public/class-bp-activity-share-public-ajax.php:209
-msgid "An update shared successfully."
+msgid "%1$s shared %2$s's %3$d %4$s in the group %5$s"
 msgstr ""
 
 #: public/class-bp-activity-share-public-ajax.php:218
+msgid "%1$s shared an update"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:220
+msgid "%1$s shared %2$s's update"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:227
+msgid "%1$s shared an update in the group %2$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:229
+msgid "%1$s shared %2$s's update in the group %3$s"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:293
+msgid "An update shared successfully."
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:302
 msgid "There is an error when sharing this update. Please refresh page and try again."
 msgstr ""
 

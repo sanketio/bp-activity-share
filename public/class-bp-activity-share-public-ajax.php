@@ -84,7 +84,7 @@ class BP_Activity_Share_Public_Ajax {
 					// Item id as an item ID.
 					$item_id = $current_activity['activities'][0]->item_id;
 				}
-			} elseif ( 'groups' === $current_activity['activities'][0]->component ) {
+			} elseif ( in_array( $current_activity['activities'][0]->component, array( 'groups', 'profile' ), true ) ) {
 				// Getting main parent activity id.
 				$main_parent_id = bp_activity_get_meta( $current_activity['activities'][0]->id, 'bp_share_activity_main_parent_id', true );
 
@@ -106,16 +106,11 @@ class BP_Activity_Share_Public_Ajax {
 				}
 			}
 
+			// Activity ID.
+			$activity_id = $item_id;
+
 			// Parent activity user's profile link.
 			$parent_profile_link = bp_core_get_userlink( $user_id );
-
-			if ( $current_user_id === $user_id ) {
-				$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
-			} else {
-				$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
-			}
-
-			$component = 'activity';
 		} else {
 			$group_id       = explode( '-', $share_to );
 			$group          = groups_get_group( array( 'group_id' => $group_id[1] ) );
@@ -128,9 +123,15 @@ class BP_Activity_Share_Public_Ajax {
 
 				// User ID as a parent activity's User ID.
 				$user_id = $parent_activity['activities'][0]->user_id;
+
+				// Activity ID.
+				$activity_id = $main_parent_id;
 			} else {
 				// User ID as a current activity's User ID
 				$user_id = $current_activity['activities'][0]->user_id;
+
+				// Activity ID.
+				$activity_id = $current_activity['activities'][0]->id;
 			}
 
 			// Item id as an item ID.
@@ -138,15 +139,114 @@ class BP_Activity_Share_Public_Ajax {
 
 			// Parent activity user's profile link.
 			$parent_profile_link = bp_core_get_userlink( $user_id );
+		}
 
-			// If user is sharing his/her own activity.
-			if ( $current_user_id === $user_id ) {
-				$action = sprintf( esc_html__( '%1$s shared an update in the group %2$s', 'bp-activity-share' ), $current_profile_link, $group_link );
-			} else {
-				$action = sprintf( esc_html__( '%1$s shared %2$s\'s update in the group %3$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, $group_link );
+		/**
+		 * Detect plugin. For use on Front End only.
+		 */
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		// Checking if RTMedia plugin is active & component is profile
+		if ( ( 'profile' === $current_activity['activities'][0]->component ) && is_plugin_active( 'buddypress-media/index.php' ) ) {
+			global $rtmedia;
+
+			$media_type = '';
+
+			// Get media using activity id.
+			$rtm_model = new RTMediaModel();
+			$media     = $rtm_model->get_media( array(
+				'activity_id' => $activity_id,
+			) );
+
+			$media_type_array = array();
+
+			// Store media type into array.
+			foreach ( $media as $single_media ) {
+				array_push( $media_type_array, $single_media->media_type );
 			}
 
-			$component = 'groups';
+			// Checking if all media are of same media type.
+			if ( 1 === count( array_unique( $media_type_array ) ) ) {
+				$media_type = $media_type_array[0];
+			}
+
+			// Check if allowed type is set or not and set label & plural label.
+			if ( ! empty( $rtmedia->allowed_types[ $media_type ] ) ) {
+				$label        = $rtmedia->allowed_types[ $media_type ]['label'];
+				$plural_label = $rtmedia->allowed_types[ $media_type ]['plural_label'];
+			} else {
+				if ( 'photo' === $media_type ) {
+					$label        = esc_html__( 'Photo', 'bp-activity-share' );
+					$plural_label = esc_html__( 'Photos', 'bp-activity-share' );
+				} elseif ( 'video' === $media_type ) {
+					$label        = esc_html__( 'Video', 'bp-activity-share' );
+					$plural_label = esc_html__( 'Videos', 'bp-activity-share' );
+				} elseif ( 'music' === $media_type ) {
+					$label        = esc_html__( 'Music', 'bp-activity-share' );
+					$plural_label = esc_html__( 'Music', 'bp-activity-share' );
+				} else {
+					$label = RTMEDIA_MEDIA_SLUG;
+					$plural_label = RTMEDIA_MEDIA_SLUG;
+				}
+			}
+
+			// Checking if sharing is in site-wide activity or in the group.
+			if ( 'bpas-sitewide-activity' === $share_to ) {
+				if ( 1 === count( $media ) ) {
+					// If user is sharing his/her own activity.
+					if ( $current_user_id === $user_id ) {
+						$action = sprintf( esc_html__( '%1$s shared a %2$s', 'bp-activity-share' ), $current_profile_link, $label );
+					} else {
+						$action = sprintf( esc_html__( '%1$s shared %2$s\'s %3$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, $label );
+					}
+				} else {
+					// If user is sharing his/her own activity.
+					if ( $current_user_id === $user_id ) {
+						$action = sprintf( esc_html__( '%1$s shared %2$d %3$s', 'bp-activity-share' ), $current_profile_link, count( $media ), $plural_label );
+					} else {
+						$action = sprintf( esc_html__( '%1$s shared %2$s\'s %3$d %4$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, count( $media ), $plural_label );
+					}
+				}
+			} else {
+				if ( 1 === count( $media ) ) {
+					// If user is sharing his/her own activity.
+					if ( $current_user_id === $user_id ) {
+						$action = sprintf( esc_html__( '%1$s shared a %2$s in the group %3$s', 'bp-activity-share' ), $current_profile_link, $label, $group_link );
+					} else {
+						$action = sprintf( esc_html__( '%1$s shared %2$s\'s %3$s in the group %4$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, $label, $group_link );
+					}
+				} else {
+					// If user is sharing his/her own activity.
+					if ( $current_user_id === $user_id ) {
+						$action = sprintf( esc_html__( '%1$s shared %2$d %3$s in the group %4$s', 'bp-activity-share' ), $current_profile_link, count( $media ), $plural_label, $group_link );
+					} else {
+						$action = sprintf( esc_html__( '%1$s shared %2$s\'s %3$d %4$s in the group %5$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, count( $media ), $plural_label, $group_link );
+					}
+				}
+			}
+
+			$component = 'profile';
+		} else {
+			// Checking if sharing is in site-wide activity or in the group.
+			if ( 'bpas-sitewide-activity' === $share_to ) {
+				// If user is sharing his/her own activity.
+				if ( $current_user_id === $user_id ) {
+					$action = sprintf( esc_html__( '%1$s shared an update', 'bp-activity-share' ), $current_profile_link );
+				} else {
+					$action = sprintf( esc_html__( '%1$s shared %2$s\'s update', 'bp-activity-share' ), $current_profile_link, $parent_profile_link );
+				}
+
+				$component = 'activity';
+			} else {
+				// If user is sharing his/her own activity.
+				if ( $current_user_id === $user_id ) {
+					$action = sprintf( esc_html__( '%1$s shared an update in the group %2$s', 'bp-activity-share' ), $current_profile_link, $group_link );
+				} else {
+					$action = sprintf( esc_html__( '%1$s shared %2$s\'s update in the group %3$s', 'bp-activity-share' ), $current_profile_link, $parent_profile_link, $group_link );
+				}
+
+				$component = 'groups';
+			}
 		}
 
 		$secondary_item_id = ( 0 === $current_activity['activities'][0]->secondary_item_id ) ? $current_activity['activities'][0]->id : $current_activity_id;
