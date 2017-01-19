@@ -37,8 +37,9 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 == Screenshots ==
 
-1. Share Activity
-2. Shared Activity
+1. Activity Types selection for Admin
+2. Share Activity
+3. Shared Activity
 
 == Changelog ==
 
