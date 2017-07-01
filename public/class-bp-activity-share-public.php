@@ -107,40 +107,16 @@ class BP_Activity_Share_Public {
 	public function bp_activity_share_button_render() {
 
 		if ( true === $this->bp_activity_share_can_share() ) {
+
 			// Getting share count.
 			$share_count = $this->bp_activity_share_get_share_count();
-
-			// Current logged in User's ID.
-			$current_user_id = bp_loggedin_user_id();
 			?>
 			<a href="#" class="button bp-primary-action bpas-show-share-options" title="<?php esc_attr_e( 'Share this activity', 'bp-activity-share' ); ?>"><?php printf( esc_html__( 'Share', 'bp-activity-share' ) . ' <span>%s</span>', esc_html( $share_count ) ); ?></a>
 			<div class="bpas-share-options-wrapper hide">
 				<select class="bpas-share-options">
 					<option value="bpas-sitewide-activity"><?php esc_html_e( 'Site-Wide Activity', 'bp-activity-share' ); ?></option>
-					<?php
-					// Checking if group component is active.
-					if ( bp_is_active( 'groups' ) ) {
-						// Getting group ids of current user.
-						$group_ids = BP_Groups_Member::get_group_ids( $current_user_id );
-
-						// Checking if user belongs to any group.
-						if ( ! empty( $group_ids ) && ! empty( $group_ids['groups'] ) ) {
-							?>
-							<optgroup label="<?php esc_attr_e( 'Groups', 'bp-activity-share' ); ?>">
-								<?php
-								foreach ( $group_ids['groups'] as $group_id ) {
-									// Getting group info using group id.
-									$group = groups_get_group( array( 'group_id' => $group_id ) );
-									?>
-									<option value="<?php echo 'group-' . esc_attr( $group_id ); ?>"><?php echo esc_html( $group->name ); ?></option>
-									<?php
-								}
-								?>
-							</optgroup>
-							<?php
-						}
-					}
-					?>
+					<option value="bpas-share-custom"><?php esc_html_e( 'Share with Custom Text', 'bp-activity-share' ); ?></option>
+					<?php echo $this->bp_activity_share_get_users_groups(); ?>
 				</select>
 				<a href="<?php $this->bp_activity_share_link(); ?>" class="button bp-activity-share bp-primary-action" title="<?php esc_attr_e( 'Share this activity', 'bp-activity-share' ); ?>">
 					<i class="dashicons dashicons-yes"></i>
@@ -151,7 +127,6 @@ class BP_Activity_Share_Public {
 			</div>
 			<?php
 		}
-
 	}
 
 	/**
@@ -266,12 +241,28 @@ class BP_Activity_Share_Public {
 	 *
 	 * @access  public
 	 */
-	public function bp_activity_share_message() {
+	public function bp_activity_share_render_custom_options() {
 
-		?>
-		<div class="bp-activity-share-message"></div>
-		<?php
+		if ( true === $this->bp_activity_share_can_share() ) :
 
+			?>
+			<div class="bp-activity-share-custom" style="display: none;">
+				<textarea name="bpas-custom-text" class="bpas-custom-text"></textarea>
+				<select class="bpas-custom-share-options">
+					<option value="bpas-sitewide-activity"><?php esc_html_e( 'Site-Wide Activity', 'bp-activity-share' ); ?></option>
+					<?php echo $this->bp_activity_share_get_users_groups(); ?>
+				</select>
+				<a href="<?php $this->bp_activity_share_link(); ?>" class="button bp-activity-share bp-primary-action" title="<?php esc_attr_e( 'Share this activity', 'bp-activity-share' ); ?>">
+					<i class="dashicons dashicons-yes"></i>
+				</a>
+				<a href="#" class="button bpas-cancel bp-primary-action" title="<?php esc_attr_e( 'Cancel', 'bp-activity-share' ); ?>">
+					<i class="dashicons dashicons-no-alt"></i>
+				</a>
+			</div>
+			<div class="bp-activity-share-message"></div>
+			<?php
+
+		endif;
 	}
 
 	/**
@@ -385,5 +376,44 @@ class BP_Activity_Share_Public {
 			bp_delete_user_meta( $user_id, 'bp_shared_activities' );
 		}
 
+	}
+
+
+	/**
+	 * Returns list of user's groups
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return string
+	 */
+	private function bp_activity_share_get_users_groups() {
+
+		$current_user_id = bp_loggedin_user_id();
+		$html            = '';
+
+		// Checking if group component is active.
+		if ( bp_is_active( 'groups' ) ) {
+
+			// Getting group ids of current user.
+			$group_ids = BP_Groups_Member::get_group_ids( $current_user_id );
+
+			// Checking if user belongs to any group.
+			if ( ! empty( $group_ids ) && ! empty( $group_ids['groups'] ) ) {
+
+				$html .= '<optgroup label="' . esc_attr__( 'Groups', 'bp-activity-share' ) . '">';
+
+				foreach ( $group_ids['groups'] as $group_id ) {
+
+					// Getting group info using group id.
+					$group = groups_get_group( array( 'group_id' => $group_id ) );
+
+					$html .= '<option value="group-' . esc_attr( $group_id ) . '">' . esc_html( $group->name ) . '</option>';
+				}
+
+				$html .= '</optgroup>';
+			}
+		}
+
+		return $html;
 	}
 }
