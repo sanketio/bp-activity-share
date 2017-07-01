@@ -14,110 +14,118 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-bp-activity-share-admin.php:79
+#: admin/class-bp-activity-share-admin.php:83
 msgid "BP Activity Share Settings"
 msgstr ""
 
-#: admin/class-bp-activity-share-admin.php:87
+#: admin/class-bp-activity-share-admin.php:91
 msgid "Sharable Activity types"
 msgstr ""
 
-#: admin/class-bp-activity-share-admin.php:200
+#: admin/class-bp-activity-share-admin.php:204
 msgid "BP Activity Share"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:179
-msgid "Photo"
-msgstr ""
-
-#: public/class-bp-activity-share-public-ajax.php:180
-msgid "Photos"
+#: admin/class-bp-activity-share-admin.php:230
+msgid "Settings"
 msgstr ""
 
 #: public/class-bp-activity-share-public-ajax.php:182
-msgid "Video"
+msgid "Photo"
 msgstr ""
 
 #: public/class-bp-activity-share-public-ajax.php:183
+msgid "Photos"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:185
+msgid "Video"
+msgstr ""
+
+#: public/class-bp-activity-share-public-ajax.php:186
 msgid "Videos"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:185, public/class-bp-activity-share-public-ajax.php:186
+#: public/class-bp-activity-share-public-ajax.php:188, public/class-bp-activity-share-public-ajax.php:189
 msgid "Music"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:198
+#: public/class-bp-activity-share-public-ajax.php:201
 msgid "%1$s shared a %2$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:200
+#: public/class-bp-activity-share-public-ajax.php:203
 msgid "%1$s shared %2$s's %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:205
+#: public/class-bp-activity-share-public-ajax.php:208
 msgid "%1$s shared %2$d %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:207
+#: public/class-bp-activity-share-public-ajax.php:210
 msgid "%1$s shared %2$s's %3$d %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:214
+#: public/class-bp-activity-share-public-ajax.php:217
 msgid "%1$s shared a %2$s in the group %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:216
+#: public/class-bp-activity-share-public-ajax.php:219
 msgid "%1$s shared %2$s's %3$s in the group %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:221
+#: public/class-bp-activity-share-public-ajax.php:224
 msgid "%1$s shared %2$d %3$s in the group %4$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:223
+#: public/class-bp-activity-share-public-ajax.php:226
 msgid "%1$s shared %2$s's %3$d %4$s in the group %5$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:234
+#: public/class-bp-activity-share-public-ajax.php:237
 msgid "%1$s shared an update"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:236
+#: public/class-bp-activity-share-public-ajax.php:239
 msgid "%1$s shared %2$s's update"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:243
+#: public/class-bp-activity-share-public-ajax.php:246
 msgid "%1$s shared an update in the group %2$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:245
+#: public/class-bp-activity-share-public-ajax.php:248
 msgid "%1$s shared %2$s's update in the group %3$s"
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:309
+#: public/class-bp-activity-share-public-ajax.php:328
 msgid "An update shared successfully."
 msgstr ""
 
-#: public/class-bp-activity-share-public-ajax.php:318
+#: public/class-bp-activity-share-public-ajax.php:337
 msgid "There is an error when sharing this update. Please refresh page and try again."
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:116, public/class-bp-activity-share-public.php:145
+#: public/class-bp-activity-share-public.php:114, public/class-bp-activity-share-public.php:121, public/class-bp-activity-share-public.php:255
 msgid "Share this activity"
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:116
+#: public/class-bp-activity-share-public.php:114
 msgid "Share"
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:119
+#: public/class-bp-activity-share-public.php:117, public/class-bp-activity-share-public.php:252
 msgid "Site-Wide Activity"
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:129
-msgid "Groups"
+#: public/class-bp-activity-share-public.php:118
+msgid "Share with Custom Text"
 msgstr ""
 
-#: public/class-bp-activity-share-public.php:148
+#: public/class-bp-activity-share-public.php:124, public/class-bp-activity-share-public.php:258
 msgid "Cancel"
+msgstr ""
+
+#: public/class-bp-activity-share-public.php:403
+msgid "Groups"
 msgstr ""
