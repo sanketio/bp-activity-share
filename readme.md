@@ -7,7 +7,7 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 **Tags:** [buddypress activity share](https://wordpress.org/plugins/tags/buddypress activity share), [buddypress share](https://wordpress.org/plugins/tags/buddypress share), [activity](https://wordpress.org/plugins/tags/activity), [buddypress](https://wordpress.org/plugins/tags/buddypress)  
 **Requires at least:** WordPress 4.0  
 **Tested up to:** WordPress 4.7.1  
-**Stable tag:** 1.3.0  
+**Stable tag:** 1.4.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 [![Build Status](https://travis-ci.org/sanketio/bp-activity-share.svg?branch=master)](https://travis-ci.org/sanketio/bp-activity-share) 
@@ -53,6 +53,10 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Changelog ##
 
+### 1.4.0 - July 01, 2017 ###
+* New - Add settings link in the plugins list
+* New - Share an activity with custom text
+
 ### 1.3.0 - January 19, 2017 ###
 * New - Admin option to select Activity Types
 * New - [rtMedia](https://wordpress.org/plugins/buddypress-media/) support
@@ -75,7 +79,7 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Upgrade Notice ##
 
-### 1.3.0 ###
-New - Admin option to select Activity Types, rtMedia Support
+### 1.4.0 ###
+New - Settings link in the plugins list, Share an activity with custom text
 
 
