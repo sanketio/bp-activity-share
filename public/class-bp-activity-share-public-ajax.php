@@ -53,6 +53,9 @@ class BP_Activity_Share_Public_Ajax {
 		// Where to share an activity.
 		$share_to = filter_input( INPUT_POST, 'share_to', FILTER_SANITIZE_STRING );
 
+		// custom text if any.
+		$custom_text = filter_input( INPUT_POST, 'custom_text', FILTER_SANITIZE_STRING );
+
 		// Current logged in User's ID.
 		$current_user_id = bp_loggedin_user_id();
 
@@ -251,16 +254,32 @@ class BP_Activity_Share_Public_Ajax {
 
 		$secondary_item_id = ( 0 === $current_activity['activities'][0]->secondary_item_id ) ? $current_activity['activities'][0]->id : $current_activity_id;
 
+		$content = $current_activity['activities'][0]->content;
+
+		// Checking if the activity is already a shared activity with custom text
+		$shared_content = explode( 'bpas-shared-content', $content );
+
+		if ( ! empty( $shared_content[1] ) ) {
+
+			$content = substr( $shared_content[1], 2, -6 );
+		}
+
+		// Checking if user shared an activity with custom text
+		if ( ! empty( $custom_text ) ) {
+
+			$content = $custom_text . '<div class="bpas-shared-content">' . $content . '</div>';
+		}
+
 		// Prepare activity arguments.
 		$activity_args = array(
 			'user_id'           => $current_user_id,
 			'action'            => $action,
-			'component'			=> $component,
-			'content'           => $current_activity['activities'][0]->content,
+			'component'         => $component,
+			'content'           => $content,
 			'type'              => 'bp_activity_share',
 			'primary_link'      => $current_profile_link,
 			'secondary_item_id' => $secondary_item_id,
-			'item_id' 			=> $item_id,
+			'item_id'           => $item_id,
 		);
 
 		$activity_id = bp_activity_add( $activity_args );
@@ -328,6 +347,29 @@ class BP_Activity_Share_Public_Ajax {
 
 		bp_core_redirect( wp_get_referer() );
 
+	}
+
+
+	/**
+	 * Overriding allowed tags in the BuddyPress activity.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param array $activity_allowed_tags allowed tags array in BuddyPress activity
+	 *
+	 * @return array
+	 */
+	public function bp_activity_share_override_allowed_tags( $activity_allowed_tags ) {
+
+		if ( ! isset( $activity_allowed_tags['div'] ) ) {
+
+			$activity_allowed_tags['div'] = array();
+		}
+
+		$activity_allowed_tags['div']['id']    = array();
+		$activity_allowed_tags['div']['class'] = array();
+
+		return $activity_allowed_tags;
 	}
 
 }

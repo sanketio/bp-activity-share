@@ -60,6 +60,10 @@ class BP_Activity_Share_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
+		// Add link to settings page.
+		add_filter( 'plugin_action_links',               array( $this, 'bp_activity_share_plugin_action_links' ), 11, 2 );
+		add_filter( 'network_admin_plugin_action_links', array( $this, 'bp_activity_share_plugin_action_links' ), 11, 2 );
+
 	}
 
 	/**
@@ -201,6 +205,30 @@ class BP_Activity_Share_Admin {
 
 		return $actions;
 
+	}
+
+	/**
+	 * Add Settings link to plugins area.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param array $links Links array in which we would prepend our link.
+	 * @param string $file Current plugin basename.
+	 *
+	 * @return array Processed links.
+	 */
+	public function bp_activity_share_plugin_action_links( $links, $file ) {
+
+		// Return normal links if not BP Activity Share.
+		if ( plugin_basename( 'bp-activity-share/bp-activity-share.php' ) !== $file ) {
+
+			return $links;
+		}
+
+		// Add a few links to the existing links array.
+		return array_merge( $links, array(
+			'settings' => '<a href="' . esc_url( bp_get_admin_url( add_query_arg( array( 'page' => 'bp-settings' ), 'admin.php' ) ) ) . '">' . esc_html__( 'Settings', 'bp-activity-share' ) . '</a>',
+		) );
 	}
 
 }
