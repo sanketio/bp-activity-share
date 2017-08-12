@@ -175,6 +175,10 @@ class BP_Activity_Share {
 		$this->loader->add_action( 'bp_activity_entry_meta',                    $bp_activity_share_public, 'bp_activity_share_button_render' );
 		$this->loader->add_action( 'bp_before_activity_entry_comments',         $bp_activity_share_public, 'bp_activity_share_render_custom_options' );
 		$this->loader->add_action( 'bp_activity_before_action_delete_activity', $bp_activity_share_public, 'bp_activity_share_delete_activity', 10, 2 );
+		$this->loader->add_action( 'admin_init',                                $bp_activity_share_public, 'register_activity_action' );
+
+		$this->loader->add_filter( 'bp_get_activity_show_filters_options', $bp_activity_share_public, 'bp_activity_share_add_filter_options', 10, 2 );
+		$this->loader->add_filter( 'bp_ajax_querystring',                  $bp_activity_share_public, 'activity_querystring_filter',          12, 2 );
 	}
 
 	/**

@@ -416,4 +416,87 @@ class BP_Activity_Share_Public {
 
 		return $html;
 	}
+
+
+	/**
+	 * Register BP Activity Share as an action of BuddyPress.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @access public
+	 */
+	public function register_activity_action() {
+
+		if ( class_exists( 'BuddyPress' ) && function_exists( 'bp_activity_set_action' ) ) {
+
+			bp_activity_set_action(
+				'bp_activity_share',
+				'bp_activity_share',
+				esc_html__( 'BP Activity Share', 'bp-activity-share' )
+			);
+		}
+	}
+
+
+	/**
+	 * Add BP Activity Share option in BuddyPress activity filter
+	 *
+	 * @since 1.5.0
+	 *
+	 * @access public
+	 *
+	 * @param array  $filters BuddyPress activity filter array
+	 * @param string $context BuddyPress context
+	 *
+	 * @return mixed
+	 */
+	public function bp_activity_share_add_filter_options( $filters, $context ) {
+
+		$filters['bp_activity_share'] = esc_html__( 'Shared Updates', 'bp-activity-share' );
+
+		return $filters;
+	}
+
+
+	/**
+	 * Modify query string filter to get shared updates.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @access public
+	 *
+	 * @param string $query_string
+	 * @param string $object
+	 *
+	 * @return string
+	 */
+	public function activity_querystring_filter( $query_string = '', $object = '' ) {
+
+		// Return if object is not activity.
+		if ( $object != 'activity' ) {
+			return $query_string;
+		}
+
+		// Manipulating the query string by transforming it into an array and merging arguments with these default ones.
+		$args = wp_parse_args( $query_string, array(
+			'action'  => false,
+			'type'    => false,
+			'user_id' => false,
+			'page'    => 1
+		) );
+
+		if ( $args['type'] === 'bp_activity_share' ) {
+			$query_string = 'type=bp_activity_share&action=bp_activity_share';
+		}
+
+		/**
+		 * Filter query string for BP Activity Share
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string $query_string Query string.
+		 * @param string $object       BuddyPress object.
+		 */
+		return apply_filters( 'bp_activity_share_activity_querystring_filter', $query_string, $object );
+	}
 }
