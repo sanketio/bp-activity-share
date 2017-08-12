@@ -151,11 +151,12 @@ class BP_Activity_Share {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new BP_Activity_Share_Admin( $this->get_plugin_name(), $this->get_version() );
+		$bp_activity_share_admin = new BP_Activity_Share_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'bp_register_admin_settings', $plugin_admin, 'bp_activity_share_activity_types', 11 );
+		$this->loader->add_action( 'bp_register_admin_settings', $bp_activity_share_admin, 'bp_activity_share_activity_types', 11 );
+		$this->loader->add_action( 'admin_notices',              $bp_activity_share_admin, 'bp_activity_share_add_admin_notice' );
 
-		$this->loader->add_filter( 'bp_activity_get_types', $plugin_admin, 'bpas_add_share_type' );
+		$this->loader->add_filter( 'bp_activity_get_types', $bp_activity_share_admin, 'bpas_add_share_type' );
 
 	}
 
