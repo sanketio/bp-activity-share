@@ -250,7 +250,7 @@ class BP_Activity_Share_Admin {
 			<div class="notice notice-error is-dismissible">
 				<p>
 					<?php
-					/* translators: %1$s: <b>, %2$s: </b>, %3$s: <b>, %4$s: <a>, %5$s: </a>, %6$s: </b> */
+					/* translators: Placeholders: %1$s - <b>, %2$s - </b>, %3$s - <b>, %4$s - <a>, %5$s - </a>, %6$s - </b> */
 					echo sprintf( __( '%1$sBP Activity Share%2$s requires %3$s%4$sBuddyPress%5$s%6$s plugin to be activated. Deactivating BP Activity Share plugin.', 'bp-activity-share' ), '<b>', '</b>', '<b>', '<a href="https://wordpress.org/plugins/buddypress/" target="_blank">', '</a>', '</b>' );
 					?>
 				</p>

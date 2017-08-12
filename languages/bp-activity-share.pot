@@ -22,12 +22,16 @@ msgstr ""
 msgid "Sharable Activity types"
 msgstr ""
 
-#: admin/class-bp-activity-share-admin.php:204
+#: admin/class-bp-activity-share-admin.php:204, public/class-bp-activity-share-public.php:435
 msgid "BP Activity Share"
 msgstr ""
 
-#: admin/class-bp-activity-share-admin.php:230
+#: admin/class-bp-activity-share-admin.php:233
 msgid "Settings"
+msgstr ""
+
+#: admin/class-bp-activity-share-admin.php:254
+msgid "%1$sBP Activity Share%2$s requires %3$s%4$sBuddyPress%5$s%6$s plugin to be activated. Deactivating BP Activity Share plugin."
 msgstr ""
 
 #: public/class-bp-activity-share-public-ajax.php:182
@@ -128,4 +132,8 @@ msgstr ""
 
 #: public/class-bp-activity-share-public.php:403
 msgid "Groups"
+msgstr ""
+
+#: public/class-bp-activity-share-public.php:455
+msgid "Shared Updates"
 msgstr ""
