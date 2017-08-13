@@ -6,17 +6,22 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 **Contributors:** [sanket.parmar](https://profiles.wordpress.org/sanket.parmar), [pranalipatel](https://profiles.wordpress.org/pranalipatel)  
 **Tags:** [buddypress activity share](https://wordpress.org/plugins/tags/buddypress activity share), [buddypress share](https://wordpress.org/plugins/tags/buddypress share), [activity](https://wordpress.org/plugins/tags/activity), [buddypress](https://wordpress.org/plugins/tags/buddypress)  
 **Requires at least:** WordPress 4.0  
-**Tested up to:** WordPress 4.7.1  
-**Stable tag:** 1.4.0  
+**Tested up to:** WordPress 4.8.1  
+**Stable tag:** 1.5.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 [![Build Status](https://travis-ci.org/sanketio/bp-activity-share.svg?branch=master)](https://travis-ci.org/sanketio/bp-activity-share) 
 
 ## Description ##
 
-BP Activity Share plugin is useful for sharing an activity locally like we are sharing any post in FaceBook.
+[BuddyPress](https://wordpress.org/plugins/buddypress/) plugin must be activated for this plugin.
 
-If you really like this plugin, you can rate here -> https://wordpress.org/support/plugin/bp-activity-share/reviews#new-topic-0
+BP Activity Share plugin is useful for sharing an activity locally like we are sharing any post in FaceBook:
+1. Share activity site-wide
+2. Share activity with custom text
+3. Share activity into any group in which user is a member
+
+If you really like this plugin, don't forget to rate -> https://wordpress.org/support/plugin/bp-activity-share/reviews#new-topic-0
 
 ## Installation ##
 
@@ -51,7 +56,16 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ![Shared Activity](assets/screenshot-3.png)
 
+### Shared Updates filter
+
+![Shared Updates filter](assets/screenshot-4.png)
+
 ## Changelog ##
+
+### 1.5.0 - August 13, 2017 ###
+* New - Register BP Activity Share as a BuddyPress action
+* New - Shared Updates in activity filter
+* Misc - Strict checking for BuddyPress plugin
 
 ### 1.4.0 - July 01, 2017 ###
 * New - Add settings link in the plugins list
@@ -79,7 +93,8 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 ## Upgrade Notice ##
 
-### 1.4.0 ###
-New - Settings link in the plugins list, Share an activity with custom text
+### 1.5.0 ###
+New - Register BP Activity Share as a BuddyPress action, Shared Updates in activity filter
+Misc - Strict checking for BuddyPress plugin
 
 
