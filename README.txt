@@ -2,7 +2,7 @@
 Contributors: sanket.parmar, pranalipatel
 Tags: buddypress activity share, buddypress share, activity, buddypress
 Requires at least: WordPress 4.0
-Tested up to: WordPress 4.7.1
+Tested up to: WordPress 4.8.1
 Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,9 +11,14 @@ Using BP Activity Share plugin you can share any activity locally like we share 
 
 == Description ==
 
-BP Activity Share plugin is useful for sharing an activity locally like we are sharing any post in FaceBook.
+[BuddyPress](https://wordpress.org/plugins/buddypress/) plugin must be activated for this plugin.
 
-If you really like this plugin, you can rate here -> https://wordpress.org/support/plugin/bp-activity-share/reviews#new-topic-0
+BP Activity Share plugin is useful for sharing an activity locally like we are sharing any post in FaceBook:
+1. Share activity site-wide
+2. Share activity with custom text
+3. Share activity into any group in which user is a member
+
+If you really like this plugin, don't forget to rate -> https://wordpress.org/support/plugin/bp-activity-share/reviews#new-topic-0
 
 == Installation ==
 
@@ -40,6 +45,7 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 1. Activity Types selection for Admin
 2. Share Activity
 3. Shared Activity
+4. Shared Updates filter
 
 == Changelog ==
 
