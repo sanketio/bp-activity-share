@@ -68,14 +68,13 @@ class BP_Activity_Share {
 	public function __construct() {
 
 		$this->plugin_name = 'bp-activity-share';
-		$this->version     = '1.4.0';
+		$this->version     = '1.5.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_public_ajax_hooks();
-
 	}
 
 	/**

@@ -3,7 +3,7 @@ Contributors: sanket.parmar, pranalipatel
 Tags: buddypress activity share, buddypress share, activity, buddypress
 Requires at least: WordPress 4.0
 Tested up to: WordPress 4.8.1
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,11 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 == Changelog ==
 
+= 1.5.0 - August 13, 2017 =
+* New - Register BP Activity Share as a BuddyPress action
+* New - Shared Updates in activity filter
+* Misc - Strict checking for BuddyPress plugin
+
 = 1.4.0 - July 01, 2017 =
 * New - Add settings link in the plugins list
 * New - Share an activity with custom text
@@ -74,5 +79,6 @@ Yes! BP Activity Share works out-of-the-box with nearly every BuddyPress support
 
 == Upgrade Notice ==
 
-= 1.4.0 =
-New - Settings link in the plugins list, Share an activity with custom text
+= 1.5.0 =
+New - Register BP Activity Share as a BuddyPress action, Shared Updates in activity filter
+Misc - Strict checking for BuddyPress plugin
